@@ -11,7 +11,7 @@ import java.util.List;
 @Port
 public interface PhoneInputPort {
 
-    public void setPersintence(PhoneOutputPort phonePersistence);
+    public void setPersistence(PhoneOutputPort phonePersistence);
 
     public Phone create(Phone phone);
 

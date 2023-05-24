@@ -12,7 +12,7 @@ import java.util.List;
 @Port
 public interface StudyInputPort {
 
-    public void setPeristence(StudyOutputPort studyPersistence);
+    public void setPersistence(StudyOutputPort studyPersistence);
 
     public Study create(Study study);
 

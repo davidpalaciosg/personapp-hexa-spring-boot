@@ -23,7 +23,7 @@ public class PhoneUseCase implements PhoneInputPort {
     }
 
     @Override
-    public void setPersintence(PhoneOutputPort phonePersistence) {
+    public void setPersistence(PhoneOutputPort phonePersistence) {
         this.phonePersistence = phonePersistence;
     }
 
