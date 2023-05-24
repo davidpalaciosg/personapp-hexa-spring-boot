@@ -1,3 +1,7 @@
+#VOLUMES
+data/
+mariadb_data/
+
 # Compiled class file
 *.class
 
