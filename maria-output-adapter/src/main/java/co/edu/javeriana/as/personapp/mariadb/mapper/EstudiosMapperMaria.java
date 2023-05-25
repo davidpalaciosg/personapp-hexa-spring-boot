@@ -2,6 +2,8 @@ package co.edu.javeriana.as.personapp.mariadb.mapper;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.Calendar;
 import java.util.Date;
 
 import co.edu.javeriana.as.personapp.domain.Person;
@@ -51,12 +53,26 @@ public class EstudiosMapperMaria {
 
 	public Study fromAdapterToDomain(EstudiosEntity estudiosEntity) {
 		Study study = new Study();
-		study.setGraduationDate(validateGraduationDate(estudiosEntity.getFecha()));
+		study.setGraduationDate(transformDate(estudiosEntity.getFecha()));
 		study.setUniversityName(validateUniversityName(estudiosEntity.getUniver()));
-		PersonaEntity persona = estudiosEntity.getPersona();
 		study.setPerson(personaMapperMaria.fromAdapterToDomain(estudiosEntity.getPersona()));
 		study.setProfession(profesionMapperMaria.fromAdapterToDomain(estudiosEntity.getProfesion()));
+
 		return study;
+	}
+
+	private LocalDate transformDate(Date date)
+	{
+		// Crea una instancia de Calendar
+		Calendar calendar = Calendar.getInstance();
+		// Establece la fecha del Calendar con el objeto Date
+		calendar.setTime(date);
+		// Obtiene el día, mes y año del Calendar
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		int month = calendar.get(Calendar.MONTH) + 1; // Los meses en Calendar están indexados desde 0
+		int year = calendar.get(Calendar.YEAR);
+		LocalDate localDate = LocalDate.of(year, month, day);
+		return localDate;
 	}
 
 	private LocalDate validateGraduationDate(Date fecha) {
