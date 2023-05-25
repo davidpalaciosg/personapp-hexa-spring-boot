@@ -39,9 +39,12 @@ public class StudyOutputAdapterMongo implements StudyOutputPort {
     @Override
     public Boolean delete(Integer professionID, Integer personID) {
         log.debug("Into delete on Adapter MongoDB");
-        EstudiosDocument estudio = estudioRepositoryMongo.findByPersonaAndProfession(personID, professionID);
+        EstudiosDocument estudio = estudioRepositoryMongo.findByPrimaryProfesionAndPrimaryPersona(professionID, personID);
+        if (estudio == null) {
+            return false;
+        }
         estudioRepositoryMongo.delete(estudio);
-        return estudioRepositoryMongo.findByPersonaAndProfession(personID, professionID) == null;
+        return estudioRepositoryMongo.findByPrimaryProfesionAndPrimaryPersona(professionID, personID) == null;
     }
 
     @Override
@@ -54,7 +57,7 @@ public class StudyOutputAdapterMongo implements StudyOutputPort {
     @Override
     public Study findById(Integer proffesionID, Integer personID) {
         log.debug("Into findById on Adapter MongoDB");
-        EstudiosDocument estudio = estudioRepositoryMongo.findByPersonaAndProfession(personID, proffesionID);
+        EstudiosDocument estudio = estudioRepositoryMongo.findByPrimaryProfesionAndPrimaryPersona(proffesionID, personID);
         if (estudio == null) {
             return null;
         } else {

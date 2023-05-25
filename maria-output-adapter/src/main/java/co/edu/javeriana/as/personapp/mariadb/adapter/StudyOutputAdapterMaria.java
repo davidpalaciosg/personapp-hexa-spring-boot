@@ -34,9 +34,12 @@ public class StudyOutputAdapterMaria implements StudyOutputPort {
     @Override
     public Boolean delete(Integer professionID, Integer personID) {
         log.debug("Into delete on Adapter MariaDB");
-        EstudiosEntity estudios = estudioRepositoryMaria.findByPersonIDAndProfessionID(personID, professionID);
+        EstudiosEntity estudios = estudioRepositoryMaria.findByProfesionAndPersona(professionID, personID);
+        if(estudios == null){
+            return false;
+        }
         estudioRepositoryMaria.delete(estudios);
-        return estudioRepositoryMaria.findByPersonIDAndProfessionID(personID, professionID) == null;
+        return estudioRepositoryMaria.findByProfesionAndPersona(professionID,personID) == null;
 
     }
 
@@ -50,7 +53,7 @@ public class StudyOutputAdapterMaria implements StudyOutputPort {
     @Override
     public Study findById(Integer professionID, Integer personID) {
         log.debug("Into findById on Adapter MariaDB");
-        EstudiosEntity estudios = estudioRepositoryMaria.findByPersonIDAndProfessionID(personID, professionID);
+        EstudiosEntity estudios = estudioRepositoryMaria.findByProfesionAndPersona(professionID, personID);
         if (estudios == null) {
             return null;
         }
