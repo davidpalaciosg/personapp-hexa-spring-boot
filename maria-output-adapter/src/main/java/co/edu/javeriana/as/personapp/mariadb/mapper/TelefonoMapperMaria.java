@@ -16,6 +16,7 @@ public class TelefonoMapperMaria {
 	private PersonaMapperMaria personaMapperMaria;
 
 	public TelefonoEntity fromDomainToAdapter(Phone phone) {
+		System.out.println("TelefonoMapperMaria.fromDomainToAdapter()");
 		TelefonoEntity telefonoEntity = new TelefonoEntity();
 		telefonoEntity.setNum(phone.getNumber());
 		telefonoEntity.setOper(phone.getCompany());

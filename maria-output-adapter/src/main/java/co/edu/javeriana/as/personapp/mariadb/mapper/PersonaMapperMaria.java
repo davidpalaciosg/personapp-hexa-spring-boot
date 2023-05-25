@@ -26,6 +26,7 @@ public class PersonaMapperMaria {
 	private TelefonoMapperMaria telefonoMapperMaria;
 
 	public PersonaEntity fromDomainToAdapter(Person person) {
+		System.out.println("PersonaMapperMaria.fromDomainToAdapter()");
 		PersonaEntity personaEntity = new PersonaEntity();
 		personaEntity.setCc(person.getIdentification());
 		personaEntity.setNombre(person.getFirstName());
@@ -65,7 +66,7 @@ public class PersonaMapperMaria {
 		person.setGender(validateGender(personaEntity.getGenero()));
 		person.setAge(validateAge(personaEntity.getEdad()));
 		person.setStudies(validateStudies(personaEntity.getEstudios()));
-		person.setPhoneNumbers(validatePhones(personaEntity.getTelefonos()));
+		//person.setPhoneNumbers(validatePhones(personaEntity.getTelefonos()));
 		return person;
 	}
 
