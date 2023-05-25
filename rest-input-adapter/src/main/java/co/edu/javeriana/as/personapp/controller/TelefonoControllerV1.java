@@ -33,4 +33,28 @@ public class TelefonoControllerV1 {
         return telefonoInputAdapterRest.crearTelefono(request);
     }
 
+    //PUT PHONE BY ID
+    @ResponseBody
+    @PutMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public TelefonoResponse updateTelefonoById(@RequestBody TelefonoResponse request) {
+        log.info("Into updateTelefonoById REST API");
+        return telefonoInputAdapterRest.editarTelefono(request);
+    }
+
+    //GET PHONE BY ID
+    @ResponseBody
+    @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public TelefonoResponse telefonoById(@RequestBody TelefonoResponse request){
+        log.info("Into telefonoById REST API");
+        return telefonoInputAdapterRest.buscarTelefono(request);
+    }
+
+    //DELETE PHONE BY ID
+    @ResponseBody
+    @DeleteMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public TelefonoResponse deleteTelefonoById(@RequestBody TelefonoResponse request) {
+        log.info("Into deleteTelefonoById REST API");
+        return telefonoInputAdapterRest.eliminarTelefono(request);
+    }
+
 }

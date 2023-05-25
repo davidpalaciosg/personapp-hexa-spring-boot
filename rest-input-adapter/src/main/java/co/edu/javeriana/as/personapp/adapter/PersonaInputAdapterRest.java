@@ -78,4 +78,42 @@ public class PersonaInputAdapterRest {
 		return null;
 	}
 
+	public PersonaResponse editarPersona(PersonaRequest request){
+		try{
+			setPersonOutputPortInjection(request.getDatabase());
+			Person person = personInputPort.edit(Integer.parseInt(request.getDni()),personaMapperRest.fromAdapterToDomain(request));
+			return personaMapperRest.fromDomainToAdapterRestMaria(person);
+		}catch (Exception e){
+			log.warn(e.getMessage());
+			//return new PersonaResponse("", "", "", "", "", "", "");
+		}
+		return null;
+	}
+
+	public PersonaResponse eliminarPersona(PersonaRequest request){
+		try{
+			setPersonOutputPortInjection(request.getDatabase());
+			Boolean resultado = personInputPort.drop(Integer.parseInt(request.getDni()));
+			return new PersonaResponse(resultado.toString(), "DELETED", "DELETED", "DELETED", "DELETED", request.getDatabase(), "DELETED");
+		} catch (Exception e){
+			log.warn(e.getMessage());
+			//return new PersonaResponse("", "", "", "", "", "", "");
+		}
+		return null;
+	}
+
+	public PersonaResponse buscarPersona(PersonaRequest request)
+	{
+		try{
+			setPersonOutputPortInjection(request.getDatabase());
+			Person person = personInputPort.findOne(Integer.parseInt(request.getDni()));
+			return personaMapperRest.fromDomainToAdapterRestMaria(person);
+		}
+		catch(Exception e){
+			log.warn(e.getMessage());
+			//return new PersonaResponse("", "", "", "", "", "", "");
+		}
+		return null;
+	}
+
 }

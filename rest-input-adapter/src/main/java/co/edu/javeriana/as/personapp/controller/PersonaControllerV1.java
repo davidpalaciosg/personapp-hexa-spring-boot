@@ -4,13 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import co.edu.javeriana.as.personapp.adapter.PersonaInputAdapterRest;
 import co.edu.javeriana.as.personapp.common.exceptions.InvalidOptionException;
@@ -32,11 +26,36 @@ public class PersonaControllerV1 {
 		log.info("Into personas REST API");
 			return personaInputAdapterRest.historial(database.toUpperCase());
 	}
-	
+
+	//POST NEW PERSONA
 	@ResponseBody
 	@PostMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public PersonaResponse crearPersona(@RequestBody PersonaRequest request) {
 		log.info("esta en el metodo crearTarea en el controller del api");
 		return personaInputAdapterRest.crearPersona(request);
+	}
+
+	//PUT PERSONA BY ID
+	@ResponseBody
+	@PutMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public PersonaResponse updatePersonaById(@RequestBody PersonaRequest request) {
+		log.info("Into updatePersonaById REST API");
+		return personaInputAdapterRest.editarPersona(request);
+	}
+
+	//GET PERSONA BY ID
+	@ResponseBody
+	@GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	public PersonaResponse personaById(@RequestBody PersonaRequest request){
+		log.info("Into personaById REST API");
+		return personaInputAdapterRest.buscarPersona(request);
+	}
+
+	//DELETE PERSONA BY ID
+	@ResponseBody
+	@DeleteMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	public PersonaResponse deletePersonaById(@RequestBody PersonaRequest request) {
+		log.info("Into deletePersonaById REST API");
+		return personaInputAdapterRest.eliminarPersona(request);
 	}
 }

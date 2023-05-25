@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Slf4j
-@Adapter("profesionOutputAdapterMongo")
+@Adapter("professionOutputAdapterMongo")
 public class ProfesionOutputAdapterMongo implements ProfessionOutputPort{
 
     @Autowired

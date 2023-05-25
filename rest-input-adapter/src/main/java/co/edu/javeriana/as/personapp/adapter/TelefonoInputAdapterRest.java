@@ -78,4 +78,45 @@ public class TelefonoInputAdapterRest {
         }
         return null;
     }
+
+    public TelefonoResponse editarTelefono(TelefonoRequest request)
+    {
+        try{
+            setPhoneOutportInjection(request.getDatabase());
+            Phone phone = phoneInputPort.edit(request.getNumber(),telefonoMapperRest.fromAdapterToDomain(request));
+            return telefonoMapperRest.fromDomainToAdapterRestMaria(phone);
+        } catch (Exception e) {
+            log.warn("Invalid database option: " + request.getDatabase()+" "+e.getMessage());
+            //return new TelefonoResponse();
+            return null;
+        }
+    }
+
+    public TelefonoResponse eliminarTelefono(TelefonoRequest request)
+    {
+        try{
+            setPhoneOutportInjection(request.getDatabase());
+            Boolean resultado = phoneInputPort.drop(request.getNumber());
+            String msg = "DELETED";
+            return new TelefonoResponse(msg,msg,request.getDatabase(),msg);
+        } catch (Exception e) {
+            log.warn("Invalid database option: " + request.getDatabase()+" "+e.getMessage());
+            //return new TelefonoResponse();
+            return null;
+        }
+    }
+
+    public TelefonoResponse buscarTelefono(TelefonoRequest request)
+    {
+        try{
+            setPhoneOutportInjection(request.getDatabase());
+            Phone phone = phoneInputPort.findOne(request.getNumber());
+            return telefonoMapperRest.fromDomainToAdapterRestMaria(phone);
+        } catch (Exception e) {
+            log.warn("Invalid database option: " + request.getDatabase()+" "+e.getMessage());
+            //return new TelefonoResponse();
+            return null;
+        }
+    }
+
 }
