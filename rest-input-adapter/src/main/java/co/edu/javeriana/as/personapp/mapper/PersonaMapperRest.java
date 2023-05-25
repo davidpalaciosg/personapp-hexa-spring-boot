@@ -5,6 +5,8 @@ import co.edu.javeriana.as.personapp.domain.Gender;
 import co.edu.javeriana.as.personapp.domain.Person;
 import co.edu.javeriana.as.personapp.model.request.PersonaRequest;
 import co.edu.javeriana.as.personapp.model.response.PersonaResponse;
+import co.edu.javeriana.as.personapp.mongo.document.PersonaDocument;
+import lombok.NonNull;
 
 @Mapper
 public class PersonaMapperRest {
@@ -28,13 +30,24 @@ public class PersonaMapperRest {
 	}
 
 	public Person fromAdapterToDomain(PersonaRequest request) {
-		Person newPerson =  new Person();
-		newPerson.setIdentification(Integer.parseInt(request.getDni()));
-		newPerson.setFirstName(request.getFirstName());
-		newPerson.setLastName(request.getLastName());
-		newPerson.setGender(Gender.defineSex(request.getSex()));
-		newPerson.setAge(Integer.parseInt(request.getAge()));
-		return newPerson;
+		Person person = new Person();
+		person.setIdentification(Integer.parseInt(request.getDni()));
+		person.setFirstName(request.getFirstName());
+		person.setLastName(request.getLastName());
+		person.setGender(validateGender(request.getSex()));
+		person.setAge(validateAge(Integer.parseInt(request.getAge())));
+		//person.setStudies(validateStudies(personaDocument.getEstudios()));
+		//person.setPhoneNumbers(validatePhones(personaDocument.getTelefonos()));
+		return person;
 	}
-		
+
+	private @NonNull Gender validateGender(String genero) {
+		return "F".equals(genero) ? Gender.FEMALE : "M".equals(genero) ? Gender.MALE : Gender.OTHER;
+	}
+
+	private Integer validateAge(Integer edad) {
+		return edad != null && edad >= 0 ? edad : null;
+	}
+
+
 }
