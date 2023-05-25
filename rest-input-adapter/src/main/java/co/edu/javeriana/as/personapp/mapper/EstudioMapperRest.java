@@ -23,24 +23,20 @@ public class EstudioMapperRest {
 
     public EstudioResponse fromDomainToAdapterRest(Study study, String database) {
        return new EstudioResponse(
+               study.getPerson().getIdentification()+"",
+               study.getProfession().getIdentification()+"",
                study.getGraduationDate(),
                study.getUniversityName(),
                database,
                "OK");
     }
 
-    public Study fromAdapterToDomain(EstudioRequest request) {
+    public Study fromAdapterToDomain(EstudioRequest request, Profession profession, Person person) {
         Study newStudy = new Study();
         newStudy.setGraduationDate(request.getGraduationDate());
         newStudy.setUniversityName(request.getUniversityName());
-
-        //TODO FIX PERSON AND PROFESSION
-        int random = (int) (Math.random() * 1000) + 1;
-        Person person = new Person(random,"PRUEBA","PRUEBA", Gender.OTHER,22,new ArrayList<>(),new ArrayList<>());
-        newStudy.setPerson(person);
-        Profession profession = new Profession(random,"PRUEBA","PRUEBA",new ArrayList<>());
         newStudy.setProfession(profession);
-
+        newStudy.setPerson(person);
         return newStudy;
     }
 }

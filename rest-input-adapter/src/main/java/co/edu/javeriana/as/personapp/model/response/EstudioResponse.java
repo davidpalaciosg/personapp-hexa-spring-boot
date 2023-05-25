@@ -8,8 +8,8 @@ public class EstudioResponse extends EstudioRequest {
 
     private String status;
 
-    public EstudioResponse(LocalDate graduationDate, String universityName, String database, String status) {
-        super(graduationDate, universityName, database);
+    public EstudioResponse(String idProfession, String idPerson, LocalDate graduationDate, String universityName, String database, String status) {
+        super(idProfession, idPerson, graduationDate, universityName, database);
         this.status = status;
     }
 

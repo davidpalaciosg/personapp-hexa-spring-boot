@@ -33,8 +33,7 @@ public class ProfesionMapperRest {
         newProfession.setIdentification(Integer.parseInt(request.getIdentification()));
         newProfession.setName(request.getName());
         newProfession.setDescription(request.getDescription());
-        //TODO FIX STUDIES
-        newProfession.setStudies(new ArrayList<>());
+
         return newProfession;
     }
 }

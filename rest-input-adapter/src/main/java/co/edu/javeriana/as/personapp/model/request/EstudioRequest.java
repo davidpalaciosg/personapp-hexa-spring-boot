@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EstudioRequest {
+    private String idProfession;
+    private String idPerson;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate graduationDate;
     private String universityName;

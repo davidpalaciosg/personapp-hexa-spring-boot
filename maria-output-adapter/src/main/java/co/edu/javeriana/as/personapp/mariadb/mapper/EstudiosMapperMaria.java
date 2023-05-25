@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+import co.edu.javeriana.as.personapp.domain.Person;
+import co.edu.javeriana.as.personapp.mariadb.entity.PersonaEntity;
+import co.edu.javeriana.as.personapp.mariadb.entity.ProfesionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import co.edu.javeriana.as.personapp.common.annotations.Mapper;
@@ -21,6 +24,7 @@ public class EstudiosMapperMaria {
 	private ProfesionMapperMaria profesionMapperMaria;
 
 	public EstudiosEntity fromDomainToAdapter(Study study) {
+
 		EstudiosEntityPK estudioPK = new EstudiosEntityPK();
 		estudioPK.setCcPer(study.getPerson().getIdentification());
 		estudioPK.setIdProf(study.getProfession().getIdentification());
@@ -28,6 +32,10 @@ public class EstudiosMapperMaria {
 		estudio.setEstudiosPK(estudioPK);
 		estudio.setFecha(validateFecha(study.getGraduationDate()));
 		estudio.setUniver(validateUniver(study.getUniversityName()));
+
+		//Asignar persona y profesion
+		estudio.setPersona(personaMapperMaria.fromDomainToAdapter(study.getPerson()));
+		estudio.setProfesion(profesionMapperMaria.fromDomainToAdapter(study.getProfession()));
 		return estudio;
 	}
 
@@ -43,10 +51,11 @@ public class EstudiosMapperMaria {
 
 	public Study fromAdapterToDomain(EstudiosEntity estudiosEntity) {
 		Study study = new Study();
-		study.setPerson(personaMapperMaria.fromAdapterToDomain(estudiosEntity.getPersona()));
-		study.setProfession(profesionMapperMaria.fromAdapterToDomain(estudiosEntity.getProfesion()));
 		study.setGraduationDate(validateGraduationDate(estudiosEntity.getFecha()));
 		study.setUniversityName(validateUniversityName(estudiosEntity.getUniver()));
+		PersonaEntity persona = estudiosEntity.getPersona();
+		study.setPerson(personaMapperMaria.fromAdapterToDomain(estudiosEntity.getPersona()));
+		study.setProfession(profesionMapperMaria.fromAdapterToDomain(estudiosEntity.getProfesion()));
 		return study;
 	}
 
