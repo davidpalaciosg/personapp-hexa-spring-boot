@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class TelefonoRequest {
     private String number;
     private String company;
+    private String idPerson;
     private String database;
 }

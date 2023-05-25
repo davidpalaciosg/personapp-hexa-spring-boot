@@ -8,6 +8,8 @@ import co.edu.javeriana.as.personapp.model.response.PersonaResponse;
 import co.edu.javeriana.as.personapp.mongo.document.PersonaDocument;
 import lombok.NonNull;
 
+import java.util.ArrayList;
+
 @Mapper
 public class PersonaMapperRest {
 	
@@ -36,8 +38,7 @@ public class PersonaMapperRest {
 		person.setLastName(request.getLastName());
 		person.setGender(validateGender(request.getSex()));
 		person.setAge(validateAge(Integer.parseInt(request.getAge())));
-		//person.setStudies(validateStudies(personaDocument.getEstudios()));
-		//person.setPhoneNumbers(validatePhones(personaDocument.getTelefonos()));
+
 		return person;
 	}
 

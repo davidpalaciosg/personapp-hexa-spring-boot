@@ -93,11 +93,11 @@ public class ProfesionInputAdapterRest {
         }
     }
 
-    public ProfesionResponse eliminarProfesion(ProfesionRequest request)
+    public ProfesionResponse eliminarProfesion(String database, String id)
     {
         try{
-            setProfessionOutputPortInjection(request.getDatabase());
-            boolean resultado = professionInputPort.drop(Integer.parseInt(request.getIdentification()));
+            setProfessionOutputPortInjection(database);
+            boolean resultado = professionInputPort.drop(Integer.parseInt(id));
             return new ProfesionResponse("DELETED","DELETED","DELETED",String.valueOf(resultado),"DELETED");
         }catch (Exception e) {
             log.warn(e.getMessage());
@@ -106,11 +106,11 @@ public class ProfesionInputAdapterRest {
         }
     }
 
-    public ProfesionResponse buscarProfesion(ProfesionRequest request)
+    public ProfesionResponse buscarProfesion(String database, String id)
     {
         try{
-            setProfessionOutputPortInjection(request.getDatabase());
-            Profession profession = professionInputPort.findOne(Integer.parseInt(request.getIdentification()));
+            setProfessionOutputPortInjection(database);
+            Profession profession = professionInputPort.findOne(Integer.parseInt(id));
             return profesionMapperRest.fromDomainToAdapterRestMaria(profession);
         }catch (Exception e) {
             log.warn(e.getMessage());

@@ -5,6 +5,8 @@ import co.edu.javeriana.as.personapp.domain.Profession;
 import co.edu.javeriana.as.personapp.model.request.ProfesionRequest;
 import co.edu.javeriana.as.personapp.model.response.ProfesionResponse;
 
+import java.util.ArrayList;
+
 @Mapper
 public class ProfesionMapperRest {
 
@@ -31,6 +33,8 @@ public class ProfesionMapperRest {
         newProfession.setIdentification(Integer.parseInt(request.getIdentification()));
         newProfession.setName(request.getName());
         newProfession.setDescription(request.getDescription());
+        //TODO FIX STUDIES
+        newProfession.setStudies(new ArrayList<>());
         return newProfession;
     }
 }

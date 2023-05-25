@@ -1,6 +1,7 @@
 package co.edu.javeriana.as.personapp.controller;
 
 import co.edu.javeriana.as.personapp.adapter.ProfesionInputAdapterRest;
+import co.edu.javeriana.as.personapp.model.request.ProfesionRequest;
 import co.edu.javeriana.as.personapp.model.response.ProfesionResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ProfesionControllerV1 {
     //POST NEW PROFESION
     @ResponseBody
     @PostMapping(path = "", produces = "application/json", consumes = "application/json")
-    public ProfesionResponse crearProfesion(@RequestBody ProfesionResponse request) {
+    public ProfesionResponse crearProfesion(@RequestBody ProfesionRequest request) {
         log.info("esta en el metodo crearProfesion en el controller del api");
         return profesionInputAdapterRest.crearProfesion(request);
     }
@@ -35,24 +36,24 @@ public class ProfesionControllerV1 {
     //PUT PROFESION BY ID
     @ResponseBody
     @PutMapping(path = "", produces = "application/json", consumes = "application/json")
-    public ProfesionResponse updateProfesionById(@RequestBody ProfesionResponse request) {
+    public ProfesionResponse updateProfesionById(@RequestBody ProfesionRequest request) {
         log.info("Into updateProfesionById REST API");
         return profesionInputAdapterRest.editarProfesion(request);
     }
 
     //GET PROFESION BY ID
     @ResponseBody
-    @GetMapping(path = "", produces = "application/json")
-    public ProfesionResponse profesionById(@RequestBody ProfesionResponse request){
+    @GetMapping(path = "/{database}/{id}", produces = "application/json")
+    public ProfesionResponse profesionById(@PathVariable String database, @PathVariable String id){
         log.info("Into profesionById REST API");
-        return profesionInputAdapterRest.buscarProfesion(request);
+        return profesionInputAdapterRest.buscarProfesion(database, id);
     }
 
     //DELETE PROFESION BY ID
     @ResponseBody
-    @DeleteMapping(path = "", produces = "application/json")
-    public ProfesionResponse deleteProfesionById(@RequestBody ProfesionResponse request) {
+    @DeleteMapping(path = "/{database}/{id}", produces = "application/json")
+    public ProfesionResponse deleteProfesionById(@PathVariable String database, @PathVariable String id) {
         log.info("Into deleteProfesionById REST API");
-        return profesionInputAdapterRest.eliminarProfesion(request);
+        return profesionInputAdapterRest.eliminarProfesion(database, id);
     }
 }

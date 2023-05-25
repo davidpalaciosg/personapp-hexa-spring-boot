@@ -1,6 +1,7 @@
 package co.edu.javeriana.as.personapp.controller;
 
 import co.edu.javeriana.as.personapp.adapter.EstudioInputAdapterRest;
+import co.edu.javeriana.as.personapp.model.request.EstudioRequest;
 import co.edu.javeriana.as.personapp.model.response.EstudioResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class EstudioControllerV1 {
     //POST NEW ESTUDIO
     @ResponseBody
     @PostMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public EstudioResponse crearEstudio(@RequestBody EstudioResponse request) {
+    public EstudioResponse crearEstudio(@RequestBody EstudioRequest request) {
         log.info("esta en el metodo crearEstudio en el controller del api");
         return estudioInputAdapterRest.crearEstudio(request);
     }

@@ -1,9 +1,13 @@
 package co.edu.javeriana.as.personapp.mapper;
 
 import co.edu.javeriana.as.personapp.common.annotations.Mapper;
+import co.edu.javeriana.as.personapp.domain.Gender;
+import co.edu.javeriana.as.personapp.domain.Person;
 import co.edu.javeriana.as.personapp.domain.Phone;
 import co.edu.javeriana.as.personapp.model.request.TelefonoRequest;
 import co.edu.javeriana.as.personapp.model.response.TelefonoResponse;
+
+import java.util.ArrayList;
 
 @Mapper
 public class TelefonoMapperRest {
@@ -20,14 +24,17 @@ public class TelefonoMapperRest {
         return new TelefonoResponse(
                 phone.getNumber(),
                 phone.getCompany(),
+                phone.getOwner().getIdentification()+"",
                 database,
                 "OK");
     }
 
-    public Phone fromAdapterToDomain(TelefonoRequest request) {
+    public Phone fromAdapterToDomain(TelefonoRequest request, Person owner) {
         Phone newPhone =  new Phone();
         newPhone.setNumber(request.getNumber());
         newPhone.setCompany(request.getCompany());
+        newPhone.setOwner(owner);
         return newPhone;
     }
+
 }

@@ -6,8 +6,8 @@ public class TelefonoResponse extends TelefonoRequest {
 
     private String status;
 
-    public TelefonoResponse(String number, String company, String database, String status) {
-        super(number, company, database);
+    public TelefonoResponse(String number, String company,String idPerson, String database, String status) {
+        super(number, company, idPerson, database);
         this.status = status;
     }
 

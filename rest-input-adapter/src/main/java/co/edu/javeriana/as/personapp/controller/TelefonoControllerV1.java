@@ -1,6 +1,7 @@
 package co.edu.javeriana.as.personapp.controller;
 
 import co.edu.javeriana.as.personapp.adapter.TelefonoInputAdapterRest;
+import co.edu.javeriana.as.personapp.model.request.TelefonoRequest;
 import co.edu.javeriana.as.personapp.model.response.TelefonoResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class TelefonoControllerV1 {
     //Post Phone
     @ResponseBody
     @PostMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public TelefonoResponse crearTelefono(@RequestBody TelefonoResponse request) {
+    public TelefonoResponse crearTelefono(@RequestBody TelefonoRequest request) {
         log.info("esta en el metodo crearTelefono en el controller del api");
         return telefonoInputAdapterRest.crearTelefono(request);
     }
@@ -36,25 +37,25 @@ public class TelefonoControllerV1 {
     //PUT PHONE BY ID
     @ResponseBody
     @PutMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public TelefonoResponse updateTelefonoById(@RequestBody TelefonoResponse request) {
+    public TelefonoResponse updateTelefonoById(@RequestBody TelefonoRequest request) {
         log.info("Into updateTelefonoById REST API");
         return telefonoInputAdapterRest.editarTelefono(request);
     }
 
     //GET PHONE BY ID
     @ResponseBody
-    @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public TelefonoResponse telefonoById(@RequestBody TelefonoResponse request){
+    @GetMapping(path = "/{database}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public TelefonoResponse telefonoById(@PathVariable String database, @PathVariable String id){
         log.info("Into telefonoById REST API");
-        return telefonoInputAdapterRest.buscarTelefono(request);
+        return telefonoInputAdapterRest.buscarTelefono(database, id);
     }
 
     //DELETE PHONE BY ID
     @ResponseBody
-    @DeleteMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public TelefonoResponse deleteTelefonoById(@RequestBody TelefonoResponse request) {
+    @DeleteMapping(path = "/{database}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public TelefonoResponse deleteTelefonoById(@PathVariable String database, @PathVariable String id) {
         log.info("Into deleteTelefonoById REST API");
-        return telefonoInputAdapterRest.eliminarTelefono(request);
+        return telefonoInputAdapterRest.eliminarTelefono(database, id);
     }
 
 }
