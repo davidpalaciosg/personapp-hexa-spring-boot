@@ -45,17 +45,17 @@ public class PersonaControllerV1 {
 
 	//GET PERSONA BY ID
 	@ResponseBody
-	@GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	public PersonaResponse personaById(@RequestBody PersonaRequest request){
+	@GetMapping(path = "/{database}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public PersonaResponse personaById(@PathVariable String database, @PathVariable String id) {
 		log.info("Into personaById REST API");
-		return personaInputAdapterRest.buscarPersona(request);
+		return personaInputAdapterRest.buscarPersona(database, id);
 	}
 
 	//DELETE PERSONA BY ID
 	@ResponseBody
-	@DeleteMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	public PersonaResponse deletePersonaById(@RequestBody PersonaRequest request) {
+	@DeleteMapping(path = "/{database}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public PersonaResponse deletePersonaById(@PathVariable String database, @PathVariable String id) {
 		log.info("Into deletePersonaById REST API");
-		return personaInputAdapterRest.eliminarPersona(request);
+		return personaInputAdapterRest.eliminarPersona(database, id);
 	}
 }

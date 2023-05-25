@@ -90,11 +90,11 @@ public class PersonaInputAdapterRest {
 		return null;
 	}
 
-	public PersonaResponse eliminarPersona(PersonaRequest request){
+	public PersonaResponse eliminarPersona(String database, String id){
 		try{
-			setPersonOutputPortInjection(request.getDatabase());
-			Boolean resultado = personInputPort.drop(Integer.parseInt(request.getDni()));
-			return new PersonaResponse(resultado.toString(), "DELETED", "DELETED", "DELETED", "DELETED", request.getDatabase(), "DELETED");
+			setPersonOutputPortInjection(database);
+			Boolean resultado = personInputPort.drop(Integer.parseInt(id));
+			return new PersonaResponse(resultado.toString(), "DELETED", "DELETED", "DELETED", "DELETED", database, "DELETED");
 		} catch (Exception e){
 			log.warn(e.getMessage());
 			//return new PersonaResponse("", "", "", "", "", "", "");
@@ -102,11 +102,11 @@ public class PersonaInputAdapterRest {
 		return null;
 	}
 
-	public PersonaResponse buscarPersona(PersonaRequest request)
+	public PersonaResponse buscarPersona(String database, String id)
 	{
 		try{
-			setPersonOutputPortInjection(request.getDatabase());
-			Person person = personInputPort.findOne(Integer.parseInt(request.getDni()));
+			setPersonOutputPortInjection(database);
+			Person person = personInputPort.findOne(Integer.parseInt(id));
 			return personaMapperRest.fromDomainToAdapterRestMaria(person);
 		}
 		catch(Exception e){
