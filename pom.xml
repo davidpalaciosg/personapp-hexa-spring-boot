@@ -33,6 +33,12 @@
 			<organization>Pontificia Universidad Javeriana</organization>
 			<organizationUrl>https://www.javeriana.edu.co</organizationUrl>
 		</developer>
+		<developer>
+			<name>David Enrique Palacios García</name>
+			<email>david_palacios@javeriana.edu.co</email>
+			<organization>Pontificia Universidad Javeriana</organization>
+			<organizationUrl>https://www.javeriana.edu.co</organizationUrl>
+		</developer>
 	</developers>
 	<modules>
 		<module>common</module>
