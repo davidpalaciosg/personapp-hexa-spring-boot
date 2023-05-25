@@ -2,7 +2,6 @@ package co.edu.javeriana.as.personapp.adapter;
 
 import co.edu.javeriana.as.personapp.application.port.in.ProfessionInputPort;
 import co.edu.javeriana.as.personapp.application.port.out.ProfessionOutputPort;
-import co.edu.javeriana.as.personapp.application.usecase.PersonUseCase;
 import co.edu.javeriana.as.personapp.application.usecase.ProfessionUseCase;
 import co.edu.javeriana.as.personapp.common.annotations.Adapter;
 import co.edu.javeriana.as.personapp.common.exceptions.InvalidOptionException;
@@ -36,7 +35,7 @@ public class ProfesionInputAdapterRest {
 
     ProfessionInputPort professionInputPort;
 
-    private String setPersonOutputPortInjection(String dbOption) throws InvalidOptionException {
+    private String setProfessionOutputPortInjection(String dbOption) throws InvalidOptionException {
         if (dbOption.equalsIgnoreCase(DatabaseOption.MARIA.toString())) {
             professionInputPort = new ProfessionUseCase(professionOutputPortMaria);
             return DatabaseOption.MARIA.toString();
@@ -52,7 +51,7 @@ public class ProfesionInputAdapterRest {
     {
         log.info("Into historial ProfesionEntity in Input Adapter");
         try {
-            String db = setPersonOutputPortInjection(database);
+            String db = setProfessionOutputPortInjection(database);
             if(db.equalsIgnoreCase(DatabaseOption.MARIA.toString())){
                 return professionInputPort.findAll().stream().map(profesionMapperRest::fromDomainToAdapterRestMaria)
                         .collect(Collectors.toList());
@@ -71,7 +70,7 @@ public class ProfesionInputAdapterRest {
     public ProfesionResponse crearProfesion(ProfesionRequest request)
     {
         try{
-            setPersonOutputPortInjection(request.getDatabase());
+            setProfessionOutputPortInjection(request.getDatabase());
             Profession profession = professionInputPort.create(profesionMapperRest.fromAdapterToDomain(request));
             return profesionMapperRest.fromDomainToAdapterRestMaria(profession);
         }catch (InvalidOptionException e) {
@@ -84,7 +83,7 @@ public class ProfesionInputAdapterRest {
     public ProfesionResponse editarProfesion(ProfesionRequest request)
     {
         try{
-            setPersonOutputPortInjection(request.getDatabase());
+            setProfessionOutputPortInjection(request.getDatabase());
             Profession profession = professionInputPort.edit(Integer.parseInt(request.getIdentification()),profesionMapperRest.fromAdapterToDomain(request));
             return profesionMapperRest.fromDomainToAdapterRestMaria(profession);
         }catch (Exception e) {
@@ -97,7 +96,7 @@ public class ProfesionInputAdapterRest {
     public ProfesionResponse eliminarProfesion(ProfesionRequest request)
     {
         try{
-            setPersonOutputPortInjection(request.getDatabase());
+            setProfessionOutputPortInjection(request.getDatabase());
             boolean resultado = professionInputPort.drop(Integer.parseInt(request.getIdentification()));
             return new ProfesionResponse("DELETED","DELETED","DELETED",String.valueOf(resultado),"DELETED");
         }catch (Exception e) {
@@ -110,7 +109,7 @@ public class ProfesionInputAdapterRest {
     public ProfesionResponse buscarProfesion(ProfesionRequest request)
     {
         try{
-            setPersonOutputPortInjection(request.getDatabase());
+            setProfessionOutputPortInjection(request.getDatabase());
             Profession profession = professionInputPort.findOne(Integer.parseInt(request.getIdentification()));
             return profesionMapperRest.fromDomainToAdapterRestMaria(profession);
         }catch (Exception e) {
