@@ -38,17 +38,17 @@ public class ProfesionMenu {
                     case PERSISTENCIA_MARIADB:
                         ProfesionMenu.DATABASE = "MARIA";
                         profesionInputAdapterCli.setProfessionOutputPortInjection(ProfesionMenu.DATABASE);
-                        menuOpciones(profesionInputAdapterCli,keyboard);
+                        menuOpciones(profesionInputAdapterCli, keyboard);
                         break;
                     case PERSISTENCIA_MONGODB:
                         ProfesionMenu.DATABASE = "MONGO";
                         profesionInputAdapterCli.setProfessionOutputPortInjection(ProfesionMenu.DATABASE);
-                        menuOpciones(profesionInputAdapterCli,keyboard);
+                        menuOpciones(profesionInputAdapterCli, keyboard);
                         break;
                     default:
                         log.warn("La opción elegida no es válida.");
                 }
-            }  catch (InvalidOptionException e) {
+            } catch (InvalidOptionException e) {
                 log.warn(e.getMessage());
             }
         } while (!isValid);
@@ -96,7 +96,6 @@ public class ProfesionMenu {
         System.out.println(OPCION_ACTUALIZAR + " para actualizar una profesion");
         System.out.println(OPCION_BUSCAR + " para buscar una profesion");
         System.out.println(OPCION_ELIMINAR + " para eliminar una profesion");
-        // implementar otras opciones
         System.out.println(OPCION_REGRESAR_MOTOR_PERSISTENCIA + " para regresar");
     }
 
@@ -127,7 +126,7 @@ public class ProfesionMenu {
         }
     }
 
-    public ProfesionModelCli leerEntidad(Scanner keyboard){
+    public ProfesionModelCli leerEntidad(Scanner keyboard) {
         try {
             ProfesionModelCli profesion = new ProfesionModelCli();
             System.out.println("Ingrese la identificacion: ");
@@ -138,13 +137,11 @@ public class ProfesionMenu {
             System.out.println("Ingrese la descripcion: ");
             profesion.setDescription(keyboard.nextLine());
             return profesion;
-        }catch (InputMismatchException e) {
+        } catch (InputMismatchException e) {
             System.out.println("Datos incorrectos, ingrese los datos nuevamente.");
             return leerEntidad(keyboard);
         }
     }
-
-
 
 
 }

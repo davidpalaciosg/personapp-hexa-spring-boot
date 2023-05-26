@@ -94,7 +94,6 @@ public class PersonaMenu {
         System.out.println(OPCION_ACTUALIZAR + " para actualizar una persona");
         System.out.println(OPCION_BUSCAR + " para buscar una persona");
         System.out.println(OPCION_ELIMINAR + " para eliminar una persona");
-        // implementar otras opciones
         System.out.println(OPCION_REGRESAR_MOTOR_PERSISTENCIA + " para regresar");
     }
 
