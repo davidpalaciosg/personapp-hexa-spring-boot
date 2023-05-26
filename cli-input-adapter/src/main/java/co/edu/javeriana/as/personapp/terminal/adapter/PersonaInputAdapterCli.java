@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Adapter
 public class PersonaInputAdapterCli {
 
+	//Puerto de salida de la aplicación
 	@Autowired
 	@Qualifier("personOutputAdapterMaria")
 	private PersonOutputPort personOutputPortMaria;
@@ -31,6 +32,7 @@ public class PersonaInputAdapterCli {
 	@Autowired
 	private PersonaMapperCli personaMapperCli;
 
+	//Puerto de entrada a la aplicación
 	PersonInputPort personInputPort;
 
 	public void setPersonOutputPortInjection(String dbOption) throws InvalidOptionException {
@@ -54,6 +56,18 @@ public class PersonaInputAdapterCli {
 	    personInputPort.findAll().stream()
 	        .map(personaMapperCli::fromDomainToAdapterCli)
 	        .forEach(System.out::println);
+	}
+
+	public void crearPersona(PersonaModelCli persona, String dbOption) {
+		log.info("Into crear PersonaEntity in Input Adapter");
+		try {
+			setPersonOutputPortInjection(dbOption);
+			personInputPort.create(personaMapperCli.fromAdapterCliToDomain(persona));
+			System.out.println("Persona creada correctamente: " + persona.toString());
+		} catch (Exception e) {
+			log.warn(e.getMessage());
+			System.out.println("Error al crear persona");
+		}
 	}
 
 }

@@ -12,4 +12,6 @@ import java.time.LocalDate;
 public class EstudioModelCli {
     private LocalDate graduationDate;
     private String universityName;
+    private String idPerson;
+    private String idProfession;
 }

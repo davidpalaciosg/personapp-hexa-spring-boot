@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class TelefonoModelCli {
     private String number;
     private String company;
-
+    private String idPerson;
 }
