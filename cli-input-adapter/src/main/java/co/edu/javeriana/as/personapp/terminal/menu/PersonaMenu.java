@@ -18,11 +18,9 @@ public class PersonaMenu {
 
     private static final int OPCION_REGRESAR_MOTOR_PERSISTENCIA = 0;
     private static final int OPCION_VER_TODO = 1;
-
     private static final int OPCION_CREAR = 2;
     private static final int OPCION_ACTUALIZAR = 3;
     private static final int OPCION_BUSCAR = 4;
-
     private static final int OPCION_ELIMINAR = 5;
 
     public void iniciarMenu(PersonaInputAdapterCli personaInputAdapterCli, Scanner keyboard) {
@@ -132,17 +130,19 @@ public class PersonaMenu {
             PersonaModelCli personaModelCli = new PersonaModelCli();
             System.out.print("Ingrese la identificacion: ");
             personaModelCli.setCc(keyboard.nextInt());
+            keyboard.nextLine();
             System.out.print("Ingrese el nombre: ");
-            personaModelCli.setNombre(keyboard.next());
+            personaModelCli.setNombre(keyboard.nextLine());
             System.out.print("Ingrese el apellido: ");
-            personaModelCli.setApellido(keyboard.next());
+            personaModelCli.setApellido(keyboard.nextLine());
             System.out.println("Ingrese el genero (M/F): ");
-            personaModelCli.setGenero(keyboard.next());
+            personaModelCli.setGenero(keyboard.nextLine());
             System.out.println("Ingrese la edad: ");
             personaModelCli.setEdad(keyboard.nextInt());
+            keyboard.nextLine();
             return personaModelCli;
         } catch (InputMismatchException e) {
-            log.warn("Datos incorrectos, ingrese los datos nuevamente.");
+            System.out.println("Datos incorrectos, ingrese los datos nuevamente.");
             return leerEntidad(keyboard);
         }
     }
