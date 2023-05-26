@@ -19,14 +19,19 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 8100:8080
     networks:
       - mynetwork
 
   mongodb:
     image: mongo
     ports:
-      - "27017:27017"
+      - "27018:27018"
+    environment:
+
+      MONGO_INITDB_ROOT_USERNAME: persona_db
+      MONGO_INITDB_ROOT_PASSWORD: persona_db
+      MONGO_INITDB_DATABASE: persona_db
     volumes:
       - ./data:/data/db
     networks:
