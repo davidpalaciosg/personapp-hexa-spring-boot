@@ -39,6 +39,7 @@ public class TelefonoMenu {
                         menuOpciones(telefonoInputAdapterCli, keyboard);
                         break;
                     case PERSISTENCIA_MONGODB:
+                        TelefonoMenu.DATABASE = "MONGO";
                         telefonoInputAdapterCli.setPhoneOutputPortInjection(TelefonoMenu.DATABASE);
                         menuOpciones(telefonoInputAdapterCli, keyboard);
                         break;
