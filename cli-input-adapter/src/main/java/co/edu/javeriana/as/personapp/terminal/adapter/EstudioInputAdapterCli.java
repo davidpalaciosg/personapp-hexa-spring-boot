@@ -51,6 +51,7 @@ public class EstudioInputAdapterCli {
     @Qualifier("professionOutputAdapterMongo")
     private ProfessionOutputPort professionOutputPortMongo;
 
+    @Autowired
     private EstudioMapperCli estudioMapperCli;
 
     //Puertos de entrada a la aplicación
