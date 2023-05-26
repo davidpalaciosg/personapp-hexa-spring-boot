@@ -3,6 +3,7 @@ package co.edu.javeriana.as.personapp.terminal.adapter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import co.edu.javeriana.as.personapp.domain.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -67,6 +68,44 @@ public class PersonaInputAdapterCli {
 		} catch (Exception e) {
 			log.warn(e.getMessage());
 			System.out.println("Error al crear persona");
+		}
+	}
+
+	public void editarPersona(PersonaModelCli persona, String dbOption) {
+		log.info("Into editar PersonaEntity in Input Adapter");
+		try {
+			setPersonOutputPortInjection(dbOption);
+			personInputPort.edit(persona.getCc(),personaMapperCli.fromAdapterCliToDomain(persona));
+			System.out.println("Persona editada correctamente: " + persona.toString());
+		} catch (Exception e) {
+			log.warn(e.getMessage());
+			System.out.println("Error al editar persona");
+		}
+	}
+
+	public void eliminarPersona(String dbOption, int cc) {
+		log.info("Into eliminar PersonaEntity in Input Adapter");
+		try {
+			setPersonOutputPortInjection(dbOption);
+			boolean resultado = personInputPort.drop(cc);
+			if (resultado)
+				System.out.println("Persona eliminada correctamente: " + cc);
+		} catch (Exception e) {
+			log.warn(e.getMessage());
+			System.out.println("Error al eliminar persona");
+		}
+	}
+
+	public void buscarPersona(String database, int cc) {
+		log.info("Into buscar PersonaEntity in Input Adapter");
+		try {
+			setPersonOutputPortInjection(database);
+			Person person = personInputPort.findOne(cc);
+			PersonaModelCli persona = personaMapperCli.fromDomainToAdapterCli(person);
+			System.out.println("Persona encontrada: " + persona.toString());
+		} catch (Exception e) {
+			log.warn(e.getMessage());
+			System.out.println("Error al buscar persona");
 		}
 	}
 

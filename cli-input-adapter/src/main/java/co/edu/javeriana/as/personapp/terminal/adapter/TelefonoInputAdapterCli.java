@@ -83,4 +83,47 @@ public class TelefonoInputAdapterCli {
             System.out.println("Error al crear el telefono");
         }
     }
+
+    public void editarTelefono(TelefonoModelCli telefonoModelCli, String database) {
+        log.info("Into editar TelefonoEntity in Input Adapter");
+        try{
+            setPhoneOutputPortInjection(database);
+            //Find person by id
+            Person owner = personInputPort.findOne(Integer.parseInt(telefonoModelCli.getIdPerson()));
+            Phone phone = phoneInputPort.edit(telefonoModelCli.getNumber(),telefonoMapperCli.fromAdapterCliToDomain(telefonoModelCli, owner));
+            System.out.println("Telefono editado correctamente: " + telefonoModelCli.toString());
+        }catch (Exception e)
+        {
+            log.warn(e.getMessage());
+            System.out.println("Error al editar el telefono");
+        }
+    }
+
+    public void eliminarTelefono(String database, String number) {
+        log.info("Into eliminar TelefonoEntity in Input Adapter");
+        try{
+            setPhoneOutputPortInjection(database);
+            boolean resultado = phoneInputPort.drop(number);
+            if (resultado)
+                System.out.println("Telefono eliminado correctamente: "+number);
+        }catch (Exception e)
+        {
+            log.warn(e.getMessage());
+            System.out.println("Error al eliminar el telefono");
+        }
+    }
+
+    public void buscarTelefono(String database, String number) {
+        log.info("Into buscar TelefonoEntity in Input Adapter");
+        try{
+            setPhoneOutputPortInjection(database);
+            Phone phone = phoneInputPort.findOne(number);
+            TelefonoModelCli telefonoModelCli = telefonoMapperCli.fromDomainToAdapterCli(phone);
+            System.out.println("Telefono encontrado: "+telefonoModelCli.toString());
+        }catch (Exception e)
+        {
+            log.warn(e.getMessage());
+            System.out.println("Error al buscar el telefono");
+        }
+    }
 }

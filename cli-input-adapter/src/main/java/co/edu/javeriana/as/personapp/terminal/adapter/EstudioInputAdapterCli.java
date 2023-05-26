@@ -98,7 +98,5 @@ public class EstudioInputAdapterCli {
             log.warn(e.getMessage());
             System.out.println("Error al crear el estudio");
         }
-
     }
-
 }

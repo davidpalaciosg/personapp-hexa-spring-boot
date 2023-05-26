@@ -1,0 +1,33 @@
+1. Iniciar bases de datos (docker-compose up)
+2. Con un cliente de BD (DBeaver, por ejemplo) crear la base de datos `persona_db' con el script
+   La base de datos Mongo no tiene autenticación, por lo que no es necesario crearla.
+3. Crear dominio de la aplicación (ya hecho)
+4. Crear módulo aplicación:
+    - Port: Out
+    - Port: In
+    - Usecases
+
+5. Crear puerto de salida MariaDB:
+    - Entity (ya hecho)
+    - Repository
+    - Mapper (Corregido)
+    - Adapter
+6. Crear puerto de salida MongoDB:
+    - Document (ya hecho)
+    - Repository
+    - Mapper (Corregido)
+    - Adapter
+
+7. Crear puerto de entrada API REST:
+    - Model (Request, Response)
+    - Mapper
+    - Adapter
+    - Controller
+8. Crear puerto de entrada CLI:
+    - Model
+    - Mapper
+    - Adapter
+    - Menu
+
+9. Dar run en IntelliJ a las aplicaciones
+10. Probar con Swagger (http://localhost:3000/swagger-ui.html) o con el CLI
