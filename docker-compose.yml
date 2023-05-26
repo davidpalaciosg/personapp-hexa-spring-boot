@@ -20,22 +20,21 @@ services:
     restart: always
     ports:
       - 8100:8080
+    environment:
+      ADMINER_PLUGINS: mongo mongodb
     networks:
       - mynetwork
 
   mongodb:
     image: mongo
     ports:
-      - "27018:27018"
+      - "27017:27017"
     environment:
-
-      MONGO_INITDB_ROOT_USERNAME: persona_db
-      MONGO_INITDB_ROOT_PASSWORD: persona_db
-      MONGO_INITDB_DATABASE: persona_db
+      - MONGO_INITDB_DATABASE=persona_db
     volumes:
       - ./data:/data/db
     networks:
       - mynetwork
-
+    command: mongod --bind_ip_all --noauth
 networks:
   mynetwork:

@@ -57,7 +57,7 @@ public class TelefonoMenu {
                     case OPCION_VER_TODO:
                         telefonoInputAdapterCli.historial();
                         break;
-                    // mas opciones
+                    // TODO mas opciones
                     default:
                         log.warn("La opción elegida no es válida.");
                 }

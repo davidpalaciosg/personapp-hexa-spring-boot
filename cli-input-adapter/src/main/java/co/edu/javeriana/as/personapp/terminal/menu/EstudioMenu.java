@@ -59,7 +59,7 @@ public class EstudioMenu {
                     case OPCION_VER_TODO:
                         estudioInputAdapterCli.historial();
                         break;
-                    // mas opciones
+                    // TODO mas opciones
                     default:
                         log.warn("La opción elegida no es válida.");
                 }

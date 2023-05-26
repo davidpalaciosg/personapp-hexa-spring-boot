@@ -60,7 +60,7 @@ public class ProfesionMenu {
                     case OPCION_VER_TODO:
                         profesionInputAdapterCli.historial();
                         break;
-                    // mas opciones
+                    // TODO mas opciones
                     default:
                         log.warn("La opción elegida no es válida.");
                 }

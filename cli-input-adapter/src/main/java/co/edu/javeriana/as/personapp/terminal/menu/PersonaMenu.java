@@ -58,7 +58,7 @@ public class PersonaMenu {
 				case OPCION_VER_TODO:
 					personaInputAdapterCli.historial();					
 					break;
-				// mas opciones
+				// TODO mas opciones
 				default:
 					log.warn("La opción elegida no es válida.");
 				}
